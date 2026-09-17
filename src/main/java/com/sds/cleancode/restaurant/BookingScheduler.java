@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingScheduler {
+
     private int capacityPerHour;
     private List<Schedule> schedules;
     private SmsSender smsSender;
@@ -19,7 +20,6 @@ public class BookingScheduler {
     }
 
     public void addSchedule(Schedule schedule) {
-
         // 정각에 예약하지 않을 경우 RuntimeException 발생
         if (schedule.getDateTime().getMinute() != 0) {
             throw new RuntimeException("Booking should be on the hour.");
@@ -32,12 +32,14 @@ public class BookingScheduler {
                 numberOfPeople += bookedSchedule.getNumberOfPeople();
             }
         }
-        if (numberOfPeople > capacityPerHour) {
-            throw new RuntimeException("Number of people is over restaurant capacity per hour");
-        }
-			
 
-		/*
+        if (numberOfPeople > capacityPerHour) {
+            throw new RuntimeException(
+                "Number of people is over restaurant capacity per hour"
+            );
+        }
+
+        /*
 		// 일요일에는 시스템을 오픈하지 않는다.
 		LocalDateTime now = LocalDateTime.now();
 		if(now.getDayOfWeek() == DayOfWeek.SUNDAY){
